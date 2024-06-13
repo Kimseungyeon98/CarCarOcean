@@ -1,5 +1,7 @@
 ![image](https://github.com/Kimseungyeon98/carcarocean/assets/121033246/633fd00d-148a-4142-a897-b7c0bc45d57b)
 
+프로젝트 발표 자료: [CarCarOcean.pdf](https://github.com/user-attachments/files/15815660/CarCarOcean.pdf)
+
 # 프로젝트 이름
 > ***CarCarOcean(카카오션)***
 > 
