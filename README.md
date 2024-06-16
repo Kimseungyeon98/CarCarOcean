@@ -65,9 +65,10 @@
  >> WebSocket
 > > 
 # ERD
-<div>
-    <img src="https://github.com/Kimseungyeon98/carcarocean/assets/121033246/80f67b74-fa7d-4635-91a1-2ada82450be8" width="500px" height="300px">
-</div>
+>
+> <div>
+>     <img src="https://github.com/Kimseungyeon98/carcarocean/assets/121033246/80f67b74-fa7d-4635-91a1-2ada82450be8" width="500px" height="300px">
+> </div>
 
 # 트러블슈팅
 > 1. 깃허브 충돌 문제
