@@ -29,11 +29,11 @@
 
 # 사용 기술
 > ## 협업 툴
- >> 노션 (문서 정리)
+ >> Notion (문서 관리)
 > > 
- >> OVEN (UI 설계)
+ >> Kakao Oven (UI 설계)
 > > 
- >> ERD CLOUD (DB 설계)
+ >> ERD Cloud (DB 설계)
 > > 
 >## IDE
  >> Eclipse
@@ -44,26 +44,28 @@
  >> CSS
 > > 
  >> JAVASCRIPT
+> >
+ >> BootStrap
+> >
+ >> JSP
+> >
+ >> jQuery
+> >
+ >> Ajax
 > > 
 >## 백엔드
  >> JAVA8
+> >
+ >> JDBC
+> >
+ >> Dispatcher Servlet
+> >
+ >> WebSocket
 > > 
 >## DB
  >> Oracle
-> > 
->## 그 외
- >> BootStrap
-> > 
- >> JSP
-> > 
- >> AJAX
-> > 
- >> Dispatcher Servlet
-> > 
- >> JDBC
-> > 
- >> WebSocket
-> > 
+> >
+
 # ERD
 >
 > <div>
