@@ -24,21 +24,24 @@
 </head>
 <body style="font-family:Noto Sans KR;">
 	<jsp:include page="/WEB-INF/views/common/loading.jsp" />
-	<div class="container border rounded my-5">
+	<div class="container border rounded my-5 px-5">
 		<h2 class="text-center p-3">채팅 목록</h2>
-		<c:if test="${empty memberList}">
+		<c:if test="${empty chatList}">
 			<div class="text-center my-3">채팅이 없습니다.</div>
 		</c:if>
-		<c:if test="${!empty memberList}">
-			<c:forEach var="member" items="${memberList}">
+		<c:if test="${!empty chatList}">
+			<c:forEach var="chat" items="${chatList}">
 			<div class="d-flex justify-content-between bg-light border rounded my-3 p-3">
-				<div class="align-self-center fw-bold">
-					<span class="badge bg-danger me-2">New</span>
-					<img src="${pageContext.request.contextPath}/upload/${member.mem_photo}"class="rounded-circle" width="50px" height="50px">
-					<span>${member.mem_id}님의 새로운 채팅</span>
+				<div class="align-items-center fw-bold d-flex">
+					<div><span class="badge bg-danger me-2">New</span></div>
+					<div><img src="${pageContext.request.contextPath}/upload/${chat.giver.mem_photo}"class="rounded-circle" width="50px" height="50px"></div>
+					<div class="ms-4">
+						<div class="mb-2">${chat.giver.mem_id}님의 채팅</div>
+						<div class="mt-2">${chat.chat_message}</div>
+					</div>
 				</div>
-				<div>
-					<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${user_num}&chat_receiver=${member.mem_num}'">대화 참여</button>
+				<div class="align-self-center">
+					<button class="btn btn-warning bnt-lg text-white fw-bold" onclick="location.href='${pageContext.request.contextPath}/chat/chat.do?item_num=${item_num}&chat_giver=${user_num}&chat_receiver=${chat.giver.mem_num}'">대화 참여</button>
 				</div>
 			</div>
 			</c:forEach>
