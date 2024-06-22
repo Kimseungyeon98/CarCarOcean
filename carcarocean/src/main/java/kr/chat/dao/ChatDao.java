@@ -104,29 +104,49 @@ public class ChatDao {
 		int cnt = 0;
 		try {
 			conn = DBUtil.getConnection();
-			sql = "select * from chat join member_detail on chat.chat_receiver=member_detail.mem_num join member_detail on chat.chat_giver=member_detail.mem_num where item_num=? and chat_receiver=? order by chat_num";
+			sql = "SELECT chat.chat_message,chat.chat_reg, chat.chat_check,"
+					+ "        receiver.mem_num as receiver_num, receiver.mem_id as receiver_id, receiver.mem_photo as receiver_photo,"
+					+ "        giver.mem_num as giver_num, giver.mem_id as giver_id, giver.mem_photo as giver_photo "
+					+ "FROM ("
+					+ "    SELECT"
+					+ "        chat_num,"
+					+ "        item_num,"
+					+ "        chat_receiver,"
+					+ "        chat_giver,"
+					+ "        chat_message,"
+					+ "        chat_reg,"
+					+ "        chat_check,"
+					+ "        ROW_NUMBER() OVER (PARTITION BY chat_receiver, chat_giver ORDER BY chat_reg DESC) as rn"
+					+ "    FROM chat"
+					+ ") chat"
+					+ "    join member receiver on chat.chat_receiver = receiver.mem_num"
+					+ "    join member_detail receiver on chat.chat_receiver = receiver.mem_num"
+					+ "    join member giver on chat.chat_giver = giver.mem_num"
+					+ "    join member_detail giver on chat.chat_giver = giver.mem_num"
+					+ " WHERE rn = 1 and item_num=? and chat_receiver=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(++cnt, item_num);
 			pstmt.setInt(++cnt, chat_receiver);
 			rs=pstmt.executeQuery();
 			list = new ArrayList<>();
 			while(rs.next()) {
+				//chat -> chat_message, chat_reg, chat_check
+				// receiver -> receiver_id, receiver_photo
+				// giver -> giver_id, giver_photo
 				ChatVo chat = new ChatVo();
-				chat.setChat_num(rs.getInt("chat_num"));
-				
-				chat.setItem(new ItemVo());
-				chat.getItem().setItem_num(rs.getInt("item_num"));
-				
-				chat.setReceiver(new MemberVo());
-				chat.getReceiver().setMem_num(rs.getInt("chat_receiver"));
-				
-				chat.setGiver(new MemberVo());
-				chat.getGiver().setMem_num(rs.getInt("chat_giver"));
-				
 				chat.setChat_message(rs.getString("chat_message"));
 				chat.setChat_reg(rs.getString("chat_reg"));
-				
 				chat.setChat_check(rs.getInt("chat_check"));
+				
+				chat.setReceiver(new MemberVo());
+				chat.getReceiver().setMem_num(rs.getInt("receiver_num"));
+				chat.getReceiver().setMem_id(rs.getString("receiver_id"));
+				chat.getReceiver().setMem_photo(rs.getString("receiver_photo"));
+				
+				chat.setGiver(new MemberVo());
+				chat.getGiver().setMem_num(rs.getInt("giver_num"));
+				chat.getGiver().setMem_id(rs.getString("giver_id"));
+				chat.getGiver().setMem_photo(rs.getString("giver_photo"));
 				
 				list.add(chat);
 			}
